@@ -1,10 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+
+    <color name="teal_200">#03DAC5</color>
+    <color name="teal_700">#018786</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="background_color_app">#F7F8FB</color>
+    <color name="card_text_color">#515367</color>
+    <color name="card_text_color_desc">#B4B8CB</color>
+    <color name="title_action_bar">#000000</color>
+    <color name="color_psy_mbti_main">#00acbf</color>
+
+    <color name="material_red">#D32F2F</color>
+    <color name="material_green">#388E3C</color>
+    <color name="material_yellow">#FBC02D</color>
+    <color name="material_purple">#512DA8</color>
+    <color name="material_light_blue">#0288D1</color>
+    <color name="material_blue">#303F9F</color>
+    <color name="material_orange">#E64A19</color>
+    <color name="material_blue_drk">#0097A7</color>
+    <color name="material_pink">#7B1FA2</color>
+    <!--    <color name="material_red">#B71C1C</color>-->
+    <!--    <color name="material_green">#1B5E20</color>-->
+    <!--    <color name="material_yellow">#F57F17</color>-->
+    <!--    <color name="material_purple">#4A148C</color>-->
+    <!--    <color name="material_light_blue">#01579B</color>-->
+    <!--    <color name="material_blue">#1A237E</color>-->
+    <!--    <color name="material_orange">#BF360C</color>-->
+    <color name="fill_clr_logo">#000000</color>
 </resources>
