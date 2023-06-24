@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">DiscountDealsList</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_home">Deals</string>
+    <string name="title_dashboard">Favorites</string>
+    <string name="deal_image">Deal Image</string>
+    <string name="deal_title_placeholder">Samsung A12</string>
+    <string name="placeholder_deal_description">Samsung A12 discount provided by Samsung regarding its 20 year celebration</string>
+    <string name="placeholder_coupon_code">SM5534ET</string>
+    <string name="placeholder_discounted_price">$120</string>
 </resources>
