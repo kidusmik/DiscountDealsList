@@ -4,22 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.deals.FavoritesFragment">
-
-    <TextView
-        android:id="@+id/top_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_4sdp"
-        android:gravity="center"
-        android:text="@string/title_home"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        android:textColor="@android:color/holo_blue_dark"
-        android:textSize="@dimen/_24ssp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/rv_favorites_list" />
+    tools:context=".fragment.favorites.FavoritesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:contentDescription="TODO"
@@ -30,7 +15,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/top_text"
+        app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/li_deals_list" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
