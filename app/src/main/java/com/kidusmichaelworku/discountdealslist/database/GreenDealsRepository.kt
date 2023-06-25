@@ -14,5 +14,5 @@ class GreenDealsRepository(private val dealsDAO: DealsDAO) {
     suspend fun deleteDeals(dealsModel: DealsModel) =
         dealsDAO.deleteDeal(dealsModel)
 
-    suspend fun getAllDeals(): LiveData<List<DealsModel>> = dealsDAO.getAllDeals()
+    fun getAllDeals(): LiveData<List<DealsModel>> = dealsDAO.getAllDeals()
 }
