@@ -46,7 +46,8 @@ class DealsListRecyclerAdapter(private val dealsList: List<Deals>, private val v
                     )
 
                     viewModel.addDeal(addedDeal)
-
+                    Toast.makeText(holder.itemView.context, "Added to favorites",
+                        Toast.LENGTH_SHORT).show()
                 }
 
                 holder.itemView.setOnClickListener {
