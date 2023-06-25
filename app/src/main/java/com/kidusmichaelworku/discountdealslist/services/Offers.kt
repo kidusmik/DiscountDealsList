@@ -1,6 +1,6 @@
 package com.kidusmichaelworku.discountdealslist.services
 
-data class Deals (
+data class Offers (
     val lmd_id: Int,
     val store: String?,
     val merchant_homepage: String?,
