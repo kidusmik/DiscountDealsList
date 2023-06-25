@@ -9,12 +9,25 @@
         android:id="@+id/navigation_deals"
         android:name="com.kidusmichaelworku.discountdealslist.fragment.deals.DealsFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_deals" />
+        tools:layout="@layout/fragment_deals" >
+        <action
+            android:id="@+id/action_navigation_deals_to_dealsDetailFragment"
+            app:destination="@id/dealsDetailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_favorites"
         android:name="com.kidusmichaelworku.discountdealslist.fragment.favorites.FavoritesFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_favorites" />
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_navigation_favorites_to_dealsDetailFragment"
+            app:destination="@id/dealsDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dealsDetailFragment"
+        android:name="com.kidusmichaelworku.discountdealslist.fragment.deals_detail.DealsDetailFragment"
+        android:label="fragment_deals_detail"
+        tools:layout="@layout/fragment_deals_detail" />
 
 </navigation>
