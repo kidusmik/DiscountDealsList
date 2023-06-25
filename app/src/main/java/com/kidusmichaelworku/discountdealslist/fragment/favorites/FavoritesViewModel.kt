@@ -17,9 +17,10 @@ class FavoritesViewModel(application: Application) : AndroidViewModel(applicatio
     init {
         val dealsDAO = GreenDealsDatabase.getInstance(application).dealsdao()
         repository = GreenDealsRepository(dealsDAO)
-        viewModelScope.launch(Dispatchers.IO) {
-            readAll = repository.getAllDeals()
-        }
+        readAll = repository.getAllDeals()
+//        viewModelScope.launch(Dispatchers.IO) {
+//            readAll = repository.getAllDeals()
+//        }
     }
 
     fun getDeals(): LiveData<List<DealsModel>> {

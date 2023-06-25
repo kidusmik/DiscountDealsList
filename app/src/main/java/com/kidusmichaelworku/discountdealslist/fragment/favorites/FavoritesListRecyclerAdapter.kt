@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.kidusmichaelworku.discountdealslist.database.DealsModel
 import com.kidusmichaelworku.discountdealslist.databinding.LiDealsListBinding
-import com.kidusmichaelworku.discountdealslist.services.Deals
 
 class FavoritesListRecyclerAdapter(private val dealsList: List<DealsModel>)
     : RecyclerView.Adapter<FavoritesListRecyclerAdapter.FavoritesListViewHolder>() {
