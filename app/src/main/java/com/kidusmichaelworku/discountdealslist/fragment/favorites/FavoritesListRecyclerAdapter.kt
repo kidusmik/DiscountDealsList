@@ -3,26 +3,24 @@ package com.kidusmichaelworku.discountdealslist.fragment.deals
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.kidusmichaelworku.discountdealslist.database.DealsModel
 import com.kidusmichaelworku.discountdealslist.databinding.LiDealsListBinding
 import com.kidusmichaelworku.discountdealslist.services.Deals
 
-class DealsListRecyclerAdapter(private val dealsList: List<Deals>, private val viewModel: DealsViewModel)
-    : RecyclerView.Adapter<DealsListRecyclerAdapter.DealsListViewHolder>() {
+class FavoritesListRecyclerAdapter(private val dealsList: List<DealsModel>)
+    : RecyclerView.Adapter<FavoritesListRecyclerAdapter.FavoritesListViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DealsListViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoritesListViewHolder {
         val binding = LiDealsListBinding
             .inflate(LayoutInflater.from(parent.context), parent, false)
-        return DealsListViewHolder(binding)
+        return FavoritesListViewHolder(binding)
     }
 
     override fun getItemCount() = dealsList.size
 
-    override fun onBindViewHolder(holder: DealsListViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FavoritesListViewHolder, position: Int) {
         with(holder){
             with(dealsList[position]) {
                 binding.tvDescriptionDeals.text = dealsList[position].description
@@ -36,19 +34,6 @@ class DealsListRecyclerAdapter(private val dealsList: List<Deals>, private val v
                     .load(dealsList[position].image_url)
                     .into(binding.ivDeals)
 
-                binding.imageButton.setOnClickListener {
-                    val addedDeal = DealsModel(
-                        lmd_id = dealsList[position].lmd_id,
-                        description = dealsList[position].description,
-                        title = dealsList[position].title,
-                        code = dealsList[position].code,
-                        offer_value = dealsList[position].offer_value
-                    )
-
-                    viewModel.addDeal(addedDeal)
-
-                }
-
                 holder.itemView.setOnClickListener {
                     Toast.makeText(holder.itemView.context, "Clicked an Item",
                         Toast.LENGTH_SHORT).show()
@@ -57,7 +42,7 @@ class DealsListRecyclerAdapter(private val dealsList: List<Deals>, private val v
         }
     }
 
-    inner class DealsListViewHolder(val binding: LiDealsListBinding)
+    inner class FavoritesListViewHolder(val binding: LiDealsListBinding)
         :RecyclerView.ViewHolder(binding.root)
 
 }

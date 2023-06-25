@@ -13,13 +13,30 @@ import kotlinx.coroutines.launch
 class FavoritesViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository: GreenDealsRepository
-    private var readAll : LiveData<List<DealsModel>>
+    private lateinit var readAll : LiveData<List<DealsModel>>
     init {
-        val dealsDAO = GreenDealsDatabase.getDatabase(application).dealsDAO()
+        val dealsDAO = GreenDealsDatabase.getInstance(application).dealsdao()
         repository = GreenDealsRepository(dealsDAO)
-        readAll = repository.getAllDeals()
+        viewModelScope.launch(Dispatchers.IO) {
+            readAll = repository.getAllDeals()
+        }
     }
 
+    fun getDeals(): LiveData<List<DealsModel>> {
+        return readAll
+    }
+
+    fun updateDeal(dealsModel: DealsModel) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateDeals(dealsModel)
+        }
+    }
+
+    fun deleteDeal(dealsModel: DealsModel) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteDeals(dealsModel)
+        }
+    }
     fun addDeal(deal: DealsModel){
         viewModelScope.launch(Dispatchers.IO) {
             repository.insertDeals(deal)

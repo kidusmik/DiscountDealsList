@@ -29,9 +29,9 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="SplashTheme" parent="Theme.MaterialComponents.NoActionBar">
+    <!--<style name="SplashTheme" parent="Theme.MaterialComponents.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_background</item>
-    </style>
+    </style>-->
 
     <style name="Theme.Enney.TextAppearance.AppCompat.Widget.ActionBar.Title" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:gravity">center_horizontal</item>

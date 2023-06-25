@@ -1,13 +1,47 @@
 package com.kidusmichaelworku.discountdealslist.fragment.deals
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.kidusmichaelworku.discountdealslist.database.DealsModel
+import com.kidusmichaelworku.discountdealslist.database.GreenDealsDatabase
+import com.kidusmichaelworku.discountdealslist.database.GreenDealsRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class DealsViewModel : ViewModel() {
+class DealsViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is deals Fragment"
+    private val repository: GreenDealsRepository
+    private lateinit var readAll : LiveData<List<DealsModel>>
+    init {
+        val dealsDAO = GreenDealsDatabase.getInstance(application).dealsdao()
+        repository = GreenDealsRepository(dealsDAO)
+        viewModelScope.launch(Dispatchers.IO) {
+            readAll = repository.getAllDeals()
+        }
     }
-    val text: LiveData<String> = _text
+
+    fun getDeals(): LiveData<List<DealsModel>> {
+        return readAll
+    }
+
+    fun updateDeal(dealsModel: DealsModel) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateDeals(dealsModel)
+        }
+    }
+
+    fun deleteDeal(dealsModel: DealsModel) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteDeals(dealsModel)
+        }
+    }
+    fun addDeal(deal: DealsModel){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.insertDeals(deal)
+        }
+    }
 }
