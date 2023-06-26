@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.kidusmichaelworku.discountdealslist.database.DealsModel
+import com.kidusmichaelworku.discountdealslist.database.FavoritesModel
 import com.kidusmichaelworku.discountdealslist.database.GreenDealsDatabase
 import com.kidusmichaelworku.discountdealslist.database.GreenDealsRepository
 import kotlinx.coroutines.Dispatchers
@@ -13,31 +13,32 @@ import kotlinx.coroutines.launch
 class FavoritesViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository: GreenDealsRepository
-    private var readAll : LiveData<List<DealsModel>>
+    private var readAll : LiveData<List<FavoritesModel>>
     init {
-        val dealsDAO = GreenDealsDatabase.getInstance(application).dealsdao()
-        repository = GreenDealsRepository(dealsDAO)
-        readAll = repository.getAllDeals()
+        val favoritesDAO = GreenDealsDatabase.getInstance(application).favoritesDAO()
+        val dealsDAO = GreenDealsDatabase.getInstance(application).dealDAO()
+        repository = GreenDealsRepository(favoritesDAO, dealsDAO)
+        readAll = repository.getAllFavorites()
     }
 
-    fun getDeals(): LiveData<List<DealsModel>> {
+    fun getDeals(): LiveData<List<FavoritesModel>> {
         return readAll
     }
 
-    fun updateDeal(dealsModel: DealsModel) {
+    fun updateDeal(favoritesModel: FavoritesModel) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.updateDeals(dealsModel)
+            repository.updateFavorites(favoritesModel)
         }
     }
 
-    fun deleteDeal(dealsModel: DealsModel) {
+    fun deleteDeal(favoritesModel: FavoritesModel) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteDeals(dealsModel)
+            repository.deleteFavorites(favoritesModel)
         }
     }
-    fun addDeal(deal: DealsModel){
+    fun addDeal(deal: FavoritesModel){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.insertDeals(deal)
+            repository.insertFavorites(deal)
         }
     }
 }
