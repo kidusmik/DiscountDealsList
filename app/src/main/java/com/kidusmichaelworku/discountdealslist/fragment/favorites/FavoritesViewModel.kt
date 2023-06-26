@@ -13,14 +13,11 @@ import kotlinx.coroutines.launch
 class FavoritesViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository: GreenDealsRepository
-    private lateinit var readAll : LiveData<List<DealsModel>>
+    private var readAll : LiveData<List<DealsModel>>
     init {
         val dealsDAO = GreenDealsDatabase.getInstance(application).dealsdao()
         repository = GreenDealsRepository(dealsDAO)
         readAll = repository.getAllDeals()
-//        viewModelScope.launch(Dispatchers.IO) {
-//            readAll = repository.getAllDeals()
-//        }
     }
 
     fun getDeals(): LiveData<List<DealsModel>> {
@@ -43,9 +40,4 @@ class FavoritesViewModel(application: Application) : AndroidViewModel(applicatio
             repository.insertDeals(deal)
         }
     }
-
-//    private val _text = MutableLiveData<String>().apply {
-//        value = "This is favorites Fragment"
-//    }
-//    val text: LiveData<String> = _text
 }

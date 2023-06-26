@@ -1,8 +1,9 @@
-package com.kidusmichaelworku.discountdealslist.fragment.deals
+package com.kidusmichaelworku.discountdealslist.fragment.favorites
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.navigation.NavDirections
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.kidusmichaelworku.discountdealslist.database.DealsModel
@@ -27,15 +28,13 @@ class FavoritesListRecyclerAdapter(private val dealsList: List<DealsModel>)
                 binding.tvCouponCodeDeals.text = dealsList[position].code
                 binding.tvDiscountedPriceDeals.text = dealsList[position].offer_value
 
-                //val hours = "$hours learning hours, $country"
-                //binding.topLearnerTime.text = hours
                 Glide.with(holder.itemView.context)
                     .load(dealsList[position].image_url)
                     .into(binding.ivDeals)
 
                 holder.itemView.setOnClickListener {
-                    Toast.makeText(holder.itemView.context, "Clicked an Item",
-                        Toast.LENGTH_SHORT).show()
+                    val action: NavDirections = FavoritesFragmentDirections.actionNavigationFavoritesToDealsDetailFragment(lmsID = dealsList[position].lmd_id)
+                    Navigation.findNavController(it).navigate(action)
                 }
             }
         }

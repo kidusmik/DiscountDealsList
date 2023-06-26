@@ -5,56 +5,70 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.kidusmichaelworku.discountdealslist.R
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
+import com.kidusmichaelworku.discountdealslist.databinding.FragmentDealsDetailBinding
+import com.kidusmichaelworku.discountdealslist.services.Offers
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [DealsDetailFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DealsDetailFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var _binding: FragmentDealsDetailBinding? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    private val binding get() = _binding!!
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_deals_detail, container, false)
+    ): View {
+        _binding = FragmentDealsDetailBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DealsDetailFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            DealsDetailFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val dealDetailViewModel = ViewModelProvider(this)[DealDetailViewModel::class.java]
+
+        val offer: Offers? = DealsDetailFragmentArgs.fromBundle(requireArguments()).offersModel
+        val lmsID: Int = DealsDetailFragmentArgs.fromBundle(requireArguments()).lmsID
+
+        var imageURL: String? = null
+        var title: String? = null
+        var description: String? = null
+        var original_price: String? = null
+        var discounted_price: String? = null
+        var expiry_date: String? = null
+        var terms_and_conditions: String? = null
+
+        if (offer != null){
+            imageURL = offer.image_url
+            title = offer.title
+            description = offer.description
+            original_price = offer.offer_value
+            discounted_price = offer.offer
+            expiry_date = offer.end_date
+            terms_and_conditions = offer.terms_and_conditions
+        }
+        if (lmsID != -1) {
+            dealDetailViewModel.getSelectedDeal(lmsID).observe(viewLifecycleOwner) { deal ->
+                imageURL = deal.image_url
+                title = deal.title
+                description = deal.description
+                original_price = deal.offer_value
+                discounted_price = deal.offer
+                expiry_date = deal.end_date
+                terms_and_conditions = deal.terms_and_conditions
             }
+        }
+
+        Glide.with(requireContext())
+            .load(imageURL)
+            .into(binding.ivDealInfo)
+
+        binding.tvTitleDealInfo.text = title
+        binding.tvDescriptionDealInfo.text = description
+        binding.tvExpiryDateDealInfo.text = expiry_date
+        binding.tvDiscountedPriceDealInfo.text = discounted_price
+        binding.tvOriginalPriceDealInfo.text = original_price
+        binding.tvTermsAndConsDealInfo.text = terms_and_conditions
     }
 }

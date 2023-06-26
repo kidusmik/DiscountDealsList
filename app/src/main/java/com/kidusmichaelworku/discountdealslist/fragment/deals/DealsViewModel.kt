@@ -15,17 +15,9 @@ import kotlinx.coroutines.launch
 class DealsViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository: GreenDealsRepository
-    private lateinit var readAll : LiveData<List<DealsModel>>
     init {
         val dealsDAO = GreenDealsDatabase.getInstance(application).dealsdao()
         repository = GreenDealsRepository(dealsDAO)
-        viewModelScope.launch(Dispatchers.IO) {
-            readAll = repository.getAllDeals()
-        }
-    }
-
-    fun getDeals(): LiveData<List<DealsModel>> {
-        return readAll
     }
 
     fun updateDeal(dealsModel: DealsModel) {
