@@ -28,6 +28,16 @@
         android:id="@+id/dealsDetailFragment"
         android:name="com.kidusmichaelworku.discountdealslist.fragment.deals_detail.DealsDetailFragment"
         android:label="fragment_deals_detail"
-        tools:layout="@layout/fragment_deals_detail" />
+        tools:layout="@layout/fragment_deals_detail" >
+        <argument
+            android:name="offersModel"
+            app:argType="com.kidusmichaelworku.discountdealslist.services.Offers"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="lmsID"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
 
 </navigation>
