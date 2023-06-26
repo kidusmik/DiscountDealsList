@@ -30,7 +30,7 @@ class DealsDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         //val dealDetailViewModel = ViewModelProvider(this)[DealDetailViewModel::class.java]
 
-        requireActivity().setTitle("Offer Details")
+        requireActivity().title = "Offer Details"
         val offer: DealModel? = DealsDetailFragmentArgs.fromBundle(requireArguments()).offersModel
         val favorites: FavoritesModel? = DealsDetailFragmentArgs.fromBundle(requireArguments()).favoritesModel
         //val lmsID: Int = DealsDetailFragmentArgs.fromBundle(requireArguments()).lmsID
