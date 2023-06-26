@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.kidusmichaelworku.discountdealslist.database.DealModel
+import com.kidusmichaelworku.discountdealslist.database.FavoritesModel
 import com.kidusmichaelworku.discountdealslist.databinding.FragmentDealsDetailBinding
 import com.kidusmichaelworku.discountdealslist.services.Offers
 
@@ -26,10 +28,12 @@ class DealsDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val dealDetailViewModel = ViewModelProvider(this)[DealDetailViewModel::class.java]
+        //val dealDetailViewModel = ViewModelProvider(this)[DealDetailViewModel::class.java]
 
-        val offer: Offers? = DealsDetailFragmentArgs.fromBundle(requireArguments()).offersModel
-        val lmsID: Int = DealsDetailFragmentArgs.fromBundle(requireArguments()).lmsID
+        requireActivity().setTitle("Offer Details")
+        val offer: DealModel? = DealsDetailFragmentArgs.fromBundle(requireArguments()).offersModel
+        val favorites: FavoritesModel? = DealsDetailFragmentArgs.fromBundle(requireArguments()).favoritesModel
+        //val lmsID: Int = DealsDetailFragmentArgs.fromBundle(requireArguments()).lmsID
 
         var imageURL: String? = null
         var title: String? = null
@@ -43,22 +47,20 @@ class DealsDetailFragment : Fragment() {
             imageURL = offer.image_url
             title = offer.title
             description = offer.description
-            original_price = offer.offer_value
-            discounted_price = offer.offer
+            original_price = offer.long_offer
+            discounted_price = offer.offer_value
             expiry_date = offer.end_date
             terms_and_conditions = offer.terms_and_conditions
         }
-        if (lmsID != -1) {
-            dealDetailViewModel.getSelectedDeal(lmsID).observe(viewLifecycleOwner) { deal ->
-                imageURL = deal.image_url
-                title = deal.title
-                description = deal.description
-                original_price = deal.offer_value
-                discounted_price = deal.offer
-                expiry_date = deal.end_date
-                terms_and_conditions = deal.terms_and_conditions
+        else if (favorites != null) {
+            imageURL = favorites.image_url
+            title = favorites.title
+            description = favorites.description
+            original_price = favorites.long_offer
+            discounted_price = favorites.offer_value
+            expiry_date = favorites.end_date
+            terms_and_conditions = favorites.terms_and_conditions
             }
-        }
 
         Glide.with(requireContext())
             .load(imageURL)

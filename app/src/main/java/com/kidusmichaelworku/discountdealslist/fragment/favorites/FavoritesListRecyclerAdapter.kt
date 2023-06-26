@@ -6,10 +6,11 @@ import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.kidusmichaelworku.discountdealslist.database.DealsModel
+import com.kidusmichaelworku.discountdealslist.database.FavoritesModel
 import com.kidusmichaelworku.discountdealslist.databinding.LiDealsListBinding
+import com.kidusmichaelworku.discountdealslist.fragment.deals.DealsViewModel
 
-class FavoritesListRecyclerAdapter(private val dealsList: List<DealsModel>)
+class FavoritesListRecyclerAdapter(private val dealsList: List<FavoritesModel>, private val viewModel: FavoritesViewModel)
     : RecyclerView.Adapter<FavoritesListRecyclerAdapter.FavoritesListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoritesListViewHolder {
@@ -33,8 +34,11 @@ class FavoritesListRecyclerAdapter(private val dealsList: List<DealsModel>)
                     .into(binding.ivDeals)
 
                 holder.itemView.setOnClickListener {
-                    val action: NavDirections = FavoritesFragmentDirections.actionNavigationFavoritesToDealsDetailFragment(lmsID = dealsList[position].lmd_id)
+                    val action: NavDirections = FavoritesFragmentDirections.actionNavigationFavoritesToDealsDetailFragment(favoritesModel =  dealsList[position])
                     Navigation.findNavController(it).navigate(action)
+                }
+                binding.imageButton.setOnClickListener {
+                    viewModel.deleteDeal(dealsList[position])
                 }
             }
         }

@@ -7,11 +7,12 @@ import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.kidusmichaelworku.discountdealslist.database.DealsModel
+import com.kidusmichaelworku.discountdealslist.database.DealModel
+import com.kidusmichaelworku.discountdealslist.database.FavoritesModel
 import com.kidusmichaelworku.discountdealslist.databinding.LiDealsListBinding
 import com.kidusmichaelworku.discountdealslist.services.Offers
 
-class DealsListRecyclerAdapter(private val offersList: List<Offers>, private val viewModel: DealsViewModel)
+class DealsListRecyclerAdapter(private val offersList: List<DealModel>, private val viewModel: DealsViewModel)
     : RecyclerView.Adapter<DealsListRecyclerAdapter.DealsListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DealsListViewHolder {
@@ -35,7 +36,7 @@ class DealsListRecyclerAdapter(private val offersList: List<Offers>, private val
                     .into(binding.ivDeals)
 
                 binding.imageButton.setOnClickListener {
-                    val addedDeal = DealsModel(
+                    val addedDeal = FavoritesModel(
                         offersList[position].lmd_id,
                         offersList[position].store,
                         offersList[position].merchant_homepage,
@@ -58,13 +59,13 @@ class DealsListRecyclerAdapter(private val offersList: List<Offers>, private val
                         offersList[position].end_date
                     )
 
-                    viewModel.addDeal(addedDeal)
+                    viewModel.addFavorites(addedDeal)
                     Toast.makeText(holder.itemView.context, "Added to favorites",
                         Toast.LENGTH_SHORT).show()
                 }
 
                 holder.itemView.setOnClickListener {
-                    val action: NavDirections = DealsFragmentDirections.actionNavigationDealsToDealsDetailFragment(offersList[position])
+                    val action: NavDirections = DealsFragmentDirections.actionNavigationDealsToDealsDetailFragment(offersModel = offersList[position])
                     Navigation.findNavController(it).navigate(action)
                 }
             }

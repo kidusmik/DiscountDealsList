@@ -4,9 +4,8 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kidusmichaelworku.discountdealslist.database.DealsModel
+import com.kidusmichaelworku.discountdealslist.database.FavoritesModel
 import com.kidusmichaelworku.discountdealslist.database.GreenDealsDatabase
 import com.kidusmichaelworku.discountdealslist.database.GreenDealsRepository
 import kotlinx.coroutines.Dispatchers
@@ -17,18 +16,20 @@ class DealDetailViewModel(application: Application) : AndroidViewModel(applicati
     private val repository: GreenDealsRepository
 
     init {
-        val dealsDAO = GreenDealsDatabase.getInstance(application).dealsdao()
-        repository = GreenDealsRepository(dealsDAO)
+        val favoritesDAO = GreenDealsDatabase.getInstance(application).favoritesDAO()
+        val dealsDAO = GreenDealsDatabase.getInstance(application).dealDAO()
+
+        repository = GreenDealsRepository(favoritesDAO, dealsDAO)
     }
 
-    fun getSelectedDeal(id: Int): LiveData<DealsModel> {
-        val deal = MutableLiveData<DealsModel>()
-        viewModelScope.launch(Dispatchers.IO) {
-            val data = repository.getSelectedDeal(id)
-            deal.postValue(data)
-        }
-        return deal
-    }
+//    fun getSelectedDeal(id: Int): LiveData<FavoritesModel> {
+//        val deal = MutableLiveData<FavoritesModel>()
+//        viewModelScope.launch(Dispatchers.IO) {
+//            val data = repository.getSelectedFavorite(id)
+//            deal.postValue(data)
+//        }
+//        return deal
+//    }
 }
 
 
