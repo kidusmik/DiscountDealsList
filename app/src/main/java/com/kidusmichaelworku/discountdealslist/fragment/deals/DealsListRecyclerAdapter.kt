@@ -3,6 +3,8 @@ package com.kidusmichaelworku.discountdealslist.fragment.deals
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.NavDirections
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.kidusmichaelworku.discountdealslist.database.DealsModel
@@ -28,19 +30,32 @@ class DealsListRecyclerAdapter(private val offersList: List<Offers>, private val
                 binding.tvCouponCodeDeals.text = offersList[position].code
                 binding.tvDiscountedPriceDeals.text = offersList[position].offer_value
 
-                //val hours = "$hours learning hours, $country"
-                //binding.topLearnerTime.text = hours
                 Glide.with(holder.itemView.context)
                     .load(offersList[position].image_url)
                     .into(binding.ivDeals)
 
                 binding.imageButton.setOnClickListener {
                     val addedDeal = DealsModel(
-                        lmd_id = offersList[position].lmd_id,
-                        description = offersList[position].description,
-                        title = offersList[position].title,
-                        code = offersList[position].code,
-                        offer_value = offersList[position].offer_value
+                        offersList[position].lmd_id,
+                        offersList[position].store,
+                        offersList[position].merchant_homepage,
+                        offersList[position].long_offer,
+                        offersList[position].title,
+                        offersList[position].description,
+                        offersList[position].code,
+                        offersList[position].terms_and_conditions,
+                        offersList[position].categories,
+                        offersList[position].featured,
+                        offersList[position].publisher_exclusive,
+                        offersList[position].url,
+                        offersList[position].smartlink,
+                        offersList[position].image_url,
+                        offersList[position].type,
+                        offersList[position].offer,
+                        offersList[position].offer_value,
+                        offersList[position].status,
+                        offersList[position].start_date,
+                        offersList[position].end_date
                     )
 
                     viewModel.addDeal(addedDeal)
@@ -49,9 +64,8 @@ class DealsListRecyclerAdapter(private val offersList: List<Offers>, private val
                 }
 
                 holder.itemView.setOnClickListener {
-                    //it.findNavController().navigate()
-                    Toast.makeText(holder.itemView.context, "Clicked an Item",
-                        Toast.LENGTH_SHORT).show()
+                    val action: NavDirections = DealsFragmentDirections.actionNavigationDealsToDealsDetailFragment(offersList[position])
+                    Navigation.findNavController(it).navigate(action)
                 }
             }
         }
