@@ -5,9 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [DealsModel::class], version = 1, exportSchema = false)
+@Database(entities = [FavoritesModel::class, DealModel::class], version = 1, exportSchema = false)
 abstract class GreenDealsDatabase : RoomDatabase() {
-    abstract fun dealsdao(): DealsDAO
+    abstract fun favoritesDAO(): FavoritesDAO
+    abstract fun dealDAO(): DealDAO
     companion object {
         private var instance: GreenDealsDatabase? = null
 

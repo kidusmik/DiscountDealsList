@@ -2,18 +2,34 @@ package com.kidusmichaelworku.discountdealslist.database
 
 import androidx.lifecycle.LiveData
 
-class GreenDealsRepository(private val dealsDAO: DealsDAO) {
+class GreenDealsRepository(private val favoritesDAO: FavoritesDAO, private val dealDAO: DealDAO) {
 
-    suspend fun insertDeals(dealsModel: DealsModel) =
-        dealsDAO.insertDeal(dealsModel)
+    fun insertFavorites(favoritesModel: FavoritesModel) =
+        favoritesDAO.insertFavorite(favoritesModel)
 
-    suspend fun updateDeals(dealsModel: DealsModel) =
-        dealsDAO.updateDeal(dealsModel)
+    fun updateFavorites(favoritesModel: FavoritesModel) =
+        favoritesDAO.updateFavorite(favoritesModel)
 
-    suspend fun deleteDeals(dealsModel: DealsModel) =
-        dealsDAO.deleteDeal(dealsModel)
+    fun deleteFavorites(favoritesModel: FavoritesModel) =
+        favoritesDAO.deleteFavorite(favoritesModel)
 
-    fun getAllDeals(): LiveData<List<DealsModel>> = dealsDAO.getAllDeals()
+    fun getAllFavorites(): LiveData<List<FavoritesModel>> = favoritesDAO.getAllFavorites()
 
-    suspend fun getSelectedDeal(id: Int): DealsModel = dealsDAO.getSelectedDeal(id)
+//    fun getSelectedFavorite(id: Int): FavoritesModel = favoritesDAO.getSelectedFavorite(id)
+
+    fun insertDeal(DealModel: DealModel) =
+        dealDAO.insertDeal(DealModel)
+
+    fun updateDeal(DealModel: DealModel) =
+        dealDAO.updateDeal(DealModel)
+
+    fun deleteDeal(DealModel: DealModel) =
+        dealDAO.deleteDeal(DealModel)
+
+    fun getAllDeal(): LiveData<List<DealModel>> = dealDAO.getAllDeals()
+
+    fun getDealsSortedByDate(): LiveData<List<DealModel>> = dealDAO.getDealsSortedByDate()
+
+    fun getDealsSortedByStore(): LiveData<List<DealModel>> = dealDAO.getDealsSortedByStore()
+//    fun getSelectedDeal(id: Int): DealModel = dealDAO.getSelectedDeal(id)
 }

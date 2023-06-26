@@ -10,19 +10,19 @@ import androidx.room.Update
 
 
 @Dao
-interface DealsDAO {
+interface FavoritesDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertDeal(dealsModel: DealsModel)
+    fun insertFavorite(favoritesModel: FavoritesModel)
 
     @Query("SELECT * FROM favorites_table")
-    fun getAllDeals(): LiveData<List<DealsModel>>
+    fun getAllFavorites(): LiveData<List<FavoritesModel>>
 
-    @Query("SELECT * FROM favorites_table WHERE lmd_id == :id")
-    fun getSelectedDeal(id: Int): DealsModel
+//    @Query("SELECT * FROM favorites_table WHERE lmd_id == :id")
+//    fun getSelectedFavorite(id: Int): FavoritesModel
 
     @Delete
-    fun deleteDeal(dealsModel: DealsModel)
+    fun deleteFavorite(favoritesModel: FavoritesModel)
 
     @Update
-    fun updateDeal(dealsModel: DealsModel)
+    fun updateFavorite(favoritesModel: FavoritesModel)
 }
