@@ -4,7 +4,6 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-
 @Entity(tableName = "favorites_table")
 data class DealsModel(
     @PrimaryKey(autoGenerate = true)
@@ -29,6 +28,3 @@ data class DealsModel(
     @ColumnInfo(name = "start_date") val start_date: String? = null,
     @ColumnInfo(name = "end_date") val end_date: String? = null
 )
-//{
-//    constructor()
-//}

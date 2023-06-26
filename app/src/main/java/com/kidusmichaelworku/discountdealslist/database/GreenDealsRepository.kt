@@ -1,6 +1,5 @@
 package com.kidusmichaelworku.discountdealslist.database
 
-import android.app.Application
 import androidx.lifecycle.LiveData
 
 class GreenDealsRepository(private val dealsDAO: DealsDAO) {
@@ -15,4 +14,6 @@ class GreenDealsRepository(private val dealsDAO: DealsDAO) {
         dealsDAO.deleteDeal(dealsModel)
 
     fun getAllDeals(): LiveData<List<DealsModel>> = dealsDAO.getAllDeals()
+
+    suspend fun getSelectedDeal(id: Int): DealsModel = dealsDAO.getSelectedDeal(id)
 }
