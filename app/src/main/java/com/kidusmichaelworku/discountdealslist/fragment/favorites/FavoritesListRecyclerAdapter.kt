@@ -6,6 +6,7 @@ import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.kidusmichaelworku.discountdealslist.R
 import com.kidusmichaelworku.discountdealslist.database.FavoritesModel
 import com.kidusmichaelworku.discountdealslist.databinding.LiDealsListBinding
 import com.kidusmichaelworku.discountdealslist.fragment.deals.DealsViewModel
@@ -28,6 +29,7 @@ class FavoritesListRecyclerAdapter(private val dealsList: List<FavoritesModel>, 
                 binding.tvTitleDeals.text = dealsList[position].title
                 binding.tvCouponCodeDeals.text = dealsList[position].code
                 binding.tvDiscountedPriceDeals.text = dealsList[position].offer_value
+                binding.imageButton.setImageResource(R.drawable.baseline_delete_forever_24)
 
                 Glide.with(holder.itemView.context)
                     .load(dealsList[position].image_url)
