@@ -31,13 +31,14 @@
         tools:layout="@layout/fragment_deals_detail" >
         <argument
             android:name="offersModel"
-            app:argType="com.kidusmichaelworku.discountdealslist.services.Offers"
+            app:argType="com.kidusmichaelworku.discountdealslist.database.DealModel"
             app:nullable="true"
             android:defaultValue="@null" />
         <argument
-            android:name="lmsID"
-            app:argType="integer"
-            android:defaultValue="-1" />
+            android:name="favoritesModel"
+            app:argType="com.kidusmichaelworku.discountdealslist.database.FavoritesModel"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 
 </navigation>
