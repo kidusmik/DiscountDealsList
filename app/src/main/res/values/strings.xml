@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DiscountDealsList</string>
+    <string name="app_name">Green Deals</string>
     <string name="title_home">Deals</string>
     <string name="title_dashboard">Favorites</string>
     <string name="deal_image">Deal Image</string>
