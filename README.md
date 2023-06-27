@@ -32,8 +32,8 @@ suspend fun getOffers(): Response
 ## Preview
 
 <p float="left">
-  <img src="/images/SplashScreen.jpg" width="100" />
-  <img src="/images/DealsPage.jpg" width="100" />
-  <img src="/images/FavoritesPage.jpg" width="100" />
-  <img src="/images/DetailsPage.jpg" width="100" />
+  <img src="/images/SplashScreen.jpg" width="300" />
+  <img src="/images/DealsPage.jpg" width="300" />
+  <img src="/images/FavoritesPage.jpg" width="300" />
+  <img src="/images/DetailsPage.jpg" width="300" />
 </p>
