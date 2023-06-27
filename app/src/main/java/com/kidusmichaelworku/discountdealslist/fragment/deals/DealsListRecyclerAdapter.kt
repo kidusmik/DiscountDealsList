@@ -1,5 +1,7 @@
 package com.kidusmichaelworku.discountdealslist.fragment.deals
 
+import android.os.Build
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -26,10 +28,20 @@ class DealsListRecyclerAdapter(private val offersList: List<DealModel>, private 
     override fun onBindViewHolder(holder: DealsListViewHolder, position: Int) {
         with(holder){
             with(offersList[position]) {
-                binding.tvDescriptionDeals.text = offersList[position].description
-                binding.tvTitleDeals.text = offersList[position].title
-                binding.tvCouponCodeDeals.text = offersList[position].code
-                binding.tvDiscountedPriceDeals.text = offersList[position].offer_value
+//                binding.tvDescriptionDeals.text = offersList[position].description
+//                binding.tvTitleDeals.text = offersList[position].title
+//                binding.tvCouponCodeDeals.text = offersList[position].code
+//                binding.tvDiscountedPriceDeals.text = offersList[position].offer_value
+
+                val title = offersList[position].title ?: "N/A"
+                val description = offersList[position].description ?: "N/A"
+                val coupon = offersList[position].code ?: "N/A"
+                val discountedPrice = offersList[position].offer_value ?: "N/A"
+
+                binding.tvDescriptionDeals.text = Html.fromHtml(description, Html.FROM_HTML_MODE_COMPACT)
+                binding.tvTitleDeals.text = Html.fromHtml(title, Html.FROM_HTML_MODE_COMPACT)
+                binding.tvCouponCodeDeals.text = Html.fromHtml(coupon, Html.FROM_HTML_MODE_COMPACT)
+                binding.tvDiscountedPriceDeals.text = Html.fromHtml(discountedPrice, Html.FROM_HTML_MODE_COMPACT)
 
                 Glide.with(holder.itemView.context)
                     .load(offersList[position].image_url)

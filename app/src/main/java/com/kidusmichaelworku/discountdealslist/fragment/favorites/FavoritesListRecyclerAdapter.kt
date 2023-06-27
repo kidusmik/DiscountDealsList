@@ -1,7 +1,9 @@
 package com.kidusmichaelworku.discountdealslist.fragment.favorites
 
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
@@ -25,11 +27,21 @@ class FavoritesListRecyclerAdapter(private val dealsList: List<FavoritesModel>, 
     override fun onBindViewHolder(holder: FavoritesListViewHolder, position: Int) {
         with(holder){
             with(dealsList[position]) {
-                binding.tvDescriptionDeals.text = dealsList[position].description
-                binding.tvTitleDeals.text = dealsList[position].title
-                binding.tvCouponCodeDeals.text = dealsList[position].code
-                binding.tvDiscountedPriceDeals.text = dealsList[position].offer_value
+//                binding.tvDescriptionDeals.text = dealsList[position].description
+//                binding.tvTitleDeals.text = dealsList[position].title
+//                binding.tvCouponCodeDeals.text = dealsList[position].code
+//                binding.tvDiscountedPriceDeals.text = dealsList[position].offer_value
+
+                val title = dealsList[position].title ?: "N/A"
+                val description = dealsList[position].description ?: "N/A"
+                val coupon = dealsList[position].code ?: "N/A"
+                val discountedPrice = dealsList[position].offer_value ?: "N/A"
+
                 binding.imageButton.setImageResource(R.drawable.baseline_delete_forever_24)
+                binding.tvDescriptionDeals.text = Html.fromHtml(description, Html.FROM_HTML_MODE_COMPACT)
+                binding.tvTitleDeals.text = Html.fromHtml(title, Html.FROM_HTML_MODE_COMPACT)
+                binding.tvCouponCodeDeals.text = Html.fromHtml(coupon, Html.FROM_HTML_MODE_COMPACT)
+                binding.tvDiscountedPriceDeals.text = Html.fromHtml(discountedPrice, Html.FROM_HTML_MODE_COMPACT)
 
                 Glide.with(holder.itemView.context)
                     .load(dealsList[position].image_url)
@@ -41,6 +53,8 @@ class FavoritesListRecyclerAdapter(private val dealsList: List<FavoritesModel>, 
                 }
                 binding.imageButton.setOnClickListener {
                     viewModel.deleteDeal(dealsList[position])
+                    Toast.makeText(holder.itemView.context, "Deal deleted",
+                        Toast.LENGTH_SHORT).show()
                 }
             }
         }

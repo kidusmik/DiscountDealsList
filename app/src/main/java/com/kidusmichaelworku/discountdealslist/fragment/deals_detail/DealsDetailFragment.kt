@@ -1,17 +1,15 @@
 package com.kidusmichaelworku.discountdealslist.fragment.deals_detail
 
 import android.os.Bundle
+import android.text.Html
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.kidusmichaelworku.discountdealslist.database.DealModel
 import com.kidusmichaelworku.discountdealslist.database.FavoritesModel
 import com.kidusmichaelworku.discountdealslist.databinding.FragmentDealsDetailBinding
-import com.kidusmichaelworku.discountdealslist.services.Offers
 
 class DealsDetailFragment : Fragment() {
     private var _binding: FragmentDealsDetailBinding? = null
@@ -38,39 +36,47 @@ class DealsDetailFragment : Fragment() {
         var imageURL: String? = null
         var title: String? = null
         var description: String? = null
-        var original_price: String? = null
-        var discounted_price: String? = null
-        var expiry_date: String? = null
-        var terms_and_conditions: String? = null
+        var originalPrice: String? = null
+        var discountedPrice: String? = null
+        var expiryDate: String? = null
+        var termsAndConditions: String? = null
 
         if (offer != null){
             imageURL = offer.image_url
-            title = offer.title
-            description = offer.description
-            original_price = offer.long_offer
-            discounted_price = offer.offer_value
-            expiry_date = offer.end_date
-            terms_and_conditions = offer.terms_and_conditions
+            title = offer.title ?: "N/A"
+            description = offer.description ?: "N/A"
+            originalPrice = offer.long_offer ?: "N/A"
+            discountedPrice = offer.offer_value ?: "N/A"
+            expiryDate = offer.end_date ?: "N/A"
+            termsAndConditions = offer.terms_and_conditions ?: "N/A"
         }
         else if (favorites != null) {
             imageURL = favorites.image_url
-            title = favorites.title
-            description = favorites.description
-            original_price = favorites.long_offer
-            discounted_price = favorites.offer_value
-            expiry_date = favorites.end_date
-            terms_and_conditions = favorites.terms_and_conditions
-            }
+            title = favorites.title ?: "N/A"
+            description = favorites.description ?: "N/A"
+            originalPrice = favorites.long_offer ?: "N/A"
+            discountedPrice = favorites.offer_value ?: "N/A"
+            expiryDate = favorites.end_date ?: "N/A"
+            termsAndConditions = favorites.terms_and_conditions ?: "N/A"
+        }
 
         Glide.with(requireContext())
             .load(imageURL)
             .into(binding.ivDealInfo)
 
-        binding.tvTitleDealInfo.text = title
-        binding.tvDescriptionDealInfo.text = description
-        binding.tvExpiryDateDealInfo.text = expiry_date
-        binding.tvDiscountedPriceDealInfo.text = discounted_price
-        binding.tvOriginalPriceDealInfo.text = original_price
-        binding.tvTermsAndConsDealInfo.text = terms_and_conditions
+//        binding.tvTitleDealInfo.text = title
+//        binding.tvDescriptionDealInfo.text = description
+//        binding.tvExpiryDateDealInfo.text = expiry_date
+//        binding.tvDiscountedPriceDealInfo.text = discounted_price
+//        binding.tvOriginalPriceDealInfo.text = original_price
+//        binding.tvTermsAndConsDealInfo.text = terms_and_conditions
+
+        binding.tvTitleDealInfo.text = Html.fromHtml(title, Html.FROM_HTML_MODE_COMPACT)
+        binding.tvDescriptionDealInfo.text = Html.fromHtml(description, Html.FROM_HTML_MODE_COMPACT)
+        binding.tvExpiryDateDealInfo.text = Html.fromHtml(expiryDate, Html.FROM_HTML_MODE_COMPACT)
+        binding.tvDiscountedPriceDealInfo.text = Html.fromHtml(discountedPrice, Html.FROM_HTML_MODE_COMPACT)
+        binding.tvOriginalPriceDealInfo.text = Html.fromHtml(originalPrice, Html.FROM_HTML_MODE_COMPACT)
+        binding.tvTermsAndConsDealInfo.text = Html.fromHtml(termsAndConditions, Html.FROM_HTML_MODE_COMPACT)
+
     }
 }
