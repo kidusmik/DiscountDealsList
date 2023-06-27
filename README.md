@@ -22,12 +22,22 @@ suspend fun getOffers(): Response
 
 ## Features
 
-- 100% Kotlin
-- Single activity, Multiple Fragments
-- MVVM
-- Room ORM
-- Navigation Components
-- View Binding
+### Functional
+- The app uses **LinkMyDeals** API to fetch the list of coupons.
+- It **stores** all the coupons fetched from the API to the **database**.
+- Each item in the list displays the title, description, image, coupon code and discounted price of the coupon.
+- The app allows users to filter for coupons by store, and sort by expiry date.
+- The app allows users to mark a coupon item as their favorite when users tap the **heart** icon.
+- The app provides a way for users to view the details of each coupon by tapping on the coupon item in the list.
+- The detailed view of each coupon displays the title, description, image, original price, discounted price, expiry date, and terms and conditions of the deal.
+- The app allows users to remove a coupon item from their favorite when tapping the **trash** icon
+
+### Technical
+- Fully **Kotlin**
+- Follows **Single activity, Multiple Fragments approach**
+- Uses **MVVM** architecture
+- Uses **Room ORM** to communicate with database
+- Uses **Android Navigation Components** and **View Binding**
 
 ## Preview
 
