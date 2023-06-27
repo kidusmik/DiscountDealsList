@@ -2,6 +2,13 @@
 
 Green Deals shows Coupons & Deals from stores. It displays deals fetched from [LinkMyDeals](https://linkmydeals.com/).
 
+<p float="left">
+  <img src="/images/SplashScreen.jpg" width="200" />
+  <img src="/images/DealsPage.jpg" width="200" />
+  <img src="/images/FavoritesPage.jpg" width="200" />
+  <img src="/images/DetailsPage.jpg" width="200" />
+</p>
+
 ## Dependencies
 
 - [Retrofit](https://github.com/square/retrofit): A type-safe HTTP client for Android and Java.
@@ -38,12 +45,3 @@ suspend fun getOffers(): Response
 - Uses **MVVM** architecture
 - Uses **Room ORM** to communicate with database
 - Uses **Android Navigation Components** and **View Binding**
-
-## Preview
-
-<p float="left">
-  <img src="/images/SplashScreen.jpg" width="300" />
-  <img src="/images/DealsPage.jpg" width="300" />
-  <img src="/images/FavoritesPage.jpg" width="300" />
-  <img src="/images/DetailsPage.jpg" width="300" />
-</p>
