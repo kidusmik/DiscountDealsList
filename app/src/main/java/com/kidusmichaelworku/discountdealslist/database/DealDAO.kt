@@ -10,24 +10,28 @@ import androidx.room.Update
 
 @Dao
 interface DealDAO {
+
+    /**
+     * Inserts a single Deal entity to the database
+     */
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertDeal(dealModel: DealModel)
 
+    /**
+     * Fetches all the Deals from the database
+     */
     @Query("SELECT * FROM deals_table")
     fun getAllDeals(): LiveData<List<DealModel>>
 
-//    @Query("SELECT * FROM deals_table WHERE lmd_id == :id")
-//    fun getSelectedDeal(id: Int): DealModel
-
-    @Delete
-    fun deleteDeal(dealModel: DealModel)
-
-    @Update
-    fun updateDeal(dealModel: DealModel)
-
+    /**
+     * Fetches all the Deals sorted by Expiry date
+     */
     @Query("SELECT * from deals_table ORDER BY CAST(end_date AS FLOAT) ASC")
     fun getDealsSortedByDate(): LiveData<List<DealModel>>
 
+    /**
+     * Fetches all the Deals sorted by Store
+     */
     @Query("SELECT * from deals_table ORDER BY  store ASC")
     fun getDealsSortedByStore(): LiveData<List<DealModel>>
 }

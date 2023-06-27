@@ -3,7 +3,11 @@ package com.kidusmichaelworku.discountdealslist.services
 import android.os.Parcel
 import android.os.Parcelable
 
-data class Offers (
+/**
+ * This is a data class that is used by Retrofit to map the fetched data to it.
+ * It is Parcelable since this class will be passed as an argument in safeargs
+ */
+data class Offers(
     val lmd_id: Int,
     val store: String?,
     val merchant_homepage: String?,

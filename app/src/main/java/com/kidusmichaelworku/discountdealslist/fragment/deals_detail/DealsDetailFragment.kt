@@ -26,12 +26,10 @@ class DealsDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //val dealDetailViewModel = ViewModelProvider(this)[DealDetailViewModel::class.java]
 
-        requireActivity().title = "Offer Details"
         val offer: DealModel? = DealsDetailFragmentArgs.fromBundle(requireArguments()).offersModel
-        val favorites: FavoritesModel? = DealsDetailFragmentArgs.fromBundle(requireArguments()).favoritesModel
-        //val lmsID: Int = DealsDetailFragmentArgs.fromBundle(requireArguments()).lmsID
+        val favorites: FavoritesModel? =
+            DealsDetailFragmentArgs.fromBundle(requireArguments()).favoritesModel
 
         var imageURL: String? = null
         var title: String? = null
@@ -41,7 +39,8 @@ class DealsDetailFragment : Fragment() {
         var expiryDate: String? = null
         var termsAndConditions: String? = null
 
-        if (offer != null){
+        /** This checks whether the argument passed is from Deals fragment or Favorites fragment **/
+        if (offer != null) {
             imageURL = offer.image_url
             title = offer.title ?: "N/A"
             description = offer.description ?: "N/A"
@@ -49,8 +48,7 @@ class DealsDetailFragment : Fragment() {
             discountedPrice = offer.offer_value ?: "N/A"
             expiryDate = offer.end_date ?: "N/A"
             termsAndConditions = offer.terms_and_conditions ?: "N/A"
-        }
-        else if (favorites != null) {
+        } else if (favorites != null) {
             imageURL = favorites.image_url
             title = favorites.title ?: "N/A"
             description = favorites.description ?: "N/A"
@@ -64,19 +62,15 @@ class DealsDetailFragment : Fragment() {
             .load(imageURL)
             .into(binding.ivDealInfo)
 
-//        binding.tvTitleDealInfo.text = title
-//        binding.tvDescriptionDealInfo.text = description
-//        binding.tvExpiryDateDealInfo.text = expiry_date
-//        binding.tvDiscountedPriceDealInfo.text = discounted_price
-//        binding.tvOriginalPriceDealInfo.text = original_price
-//        binding.tvTermsAndConsDealInfo.text = terms_and_conditions
-
         binding.tvTitleDealInfo.text = Html.fromHtml(title, Html.FROM_HTML_MODE_COMPACT)
         binding.tvDescriptionDealInfo.text = Html.fromHtml(description, Html.FROM_HTML_MODE_COMPACT)
         binding.tvExpiryDateDealInfo.text = Html.fromHtml(expiryDate, Html.FROM_HTML_MODE_COMPACT)
-        binding.tvDiscountedPriceDealInfo.text = Html.fromHtml(discountedPrice, Html.FROM_HTML_MODE_COMPACT)
-        binding.tvOriginalPriceDealInfo.text = Html.fromHtml(originalPrice, Html.FROM_HTML_MODE_COMPACT)
-        binding.tvTermsAndConsDealInfo.text = Html.fromHtml(termsAndConditions, Html.FROM_HTML_MODE_COMPACT)
+        binding.tvDiscountedPriceDealInfo.text =
+            Html.fromHtml(discountedPrice, Html.FROM_HTML_MODE_COMPACT)
+        binding.tvOriginalPriceDealInfo.text =
+            Html.fromHtml(originalPrice, Html.FROM_HTML_MODE_COMPACT)
+        binding.tvTermsAndConsDealInfo.text =
+            Html.fromHtml(termsAndConditions, Html.FROM_HTML_MODE_COMPACT)
 
     }
 }

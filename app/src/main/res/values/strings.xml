@@ -8,4 +8,14 @@
     <string name="placeholder_coupon_code">SM5534ET</string>
     <string name="placeholder_discounted_price">$120</string>
     <string name="add_to_favorites_button">Add to favorites button</string>
+    <string name="nothing_to_filter_by_store">Nothing to Filter by Store</string>
+    <string name="offers_are_sorted_by_store">Offers are sorted by Store</string>
+    <string name="sort_by_store">Sort by Store</string>
+    <string name="sort_by_date">Sort by Date</string>
+    <string name="expiry_date">Expiry Date:</string>
+    <string name="terms_and_conditions">Terms and Conditions</string>
+    <string name="discounted_price">Discounted Price:</string>
+    <string name="original_price">Original Price:</string>
+    <string name="description">Description:</string>
+    <string name="image_of_the_store">Image of the Store</string>
 </resources>

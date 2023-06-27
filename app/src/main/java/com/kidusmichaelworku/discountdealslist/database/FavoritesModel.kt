@@ -6,6 +6,10 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * This is an entity or model that holds Favorites elements.
+ * It is Parcelable since this class will be passed as an argument in safeargs
+ */
 @Entity(tableName = "favorites_table")
 data class FavoritesModel(
     @PrimaryKey(autoGenerate = true)

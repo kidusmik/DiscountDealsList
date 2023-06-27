@@ -7,24 +7,13 @@ class GreenDealsRepository(private val favoritesDAO: FavoritesDAO, private val d
     fun insertFavorites(favoritesModel: FavoritesModel) =
         favoritesDAO.insertFavorite(favoritesModel)
 
-    fun updateFavorites(favoritesModel: FavoritesModel) =
-        favoritesDAO.updateFavorite(favoritesModel)
-
     fun deleteFavorites(favoritesModel: FavoritesModel) =
         favoritesDAO.deleteFavorite(favoritesModel)
 
     fun getAllFavorites(): LiveData<List<FavoritesModel>> = favoritesDAO.getAllFavorites()
 
-//    fun getSelectedFavorite(id: Int): FavoritesModel = favoritesDAO.getSelectedFavorite(id)
-
     fun insertDeal(DealModel: DealModel) =
         dealDAO.insertDeal(DealModel)
-
-    fun updateDeal(DealModel: DealModel) =
-        dealDAO.updateDeal(DealModel)
-
-    fun deleteDeal(DealModel: DealModel) =
-        dealDAO.deleteDeal(DealModel)
 
     fun getAllDeal(): LiveData<List<DealModel>> = dealDAO.getAllDeals()
 

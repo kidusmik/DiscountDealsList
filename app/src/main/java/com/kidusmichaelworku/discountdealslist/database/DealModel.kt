@@ -7,6 +7,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.kidusmichaelworku.discountdealslist.services.Offers
 
+/**
+ * This is an entity or model that holds Deal elements.
+ * It is Parcelable since this class will be passed as an argument in safeargs
+ */
 @Entity(tableName = "deals_table")
 data class DealModel(
     @PrimaryKey(autoGenerate = true)

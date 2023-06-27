@@ -1,6 +1,5 @@
 package com.kidusmichaelworku.discountdealslist.fragment.deals
 
-import android.os.Build
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,10 +11,11 @@ import com.bumptech.glide.Glide
 import com.kidusmichaelworku.discountdealslist.database.DealModel
 import com.kidusmichaelworku.discountdealslist.database.FavoritesModel
 import com.kidusmichaelworku.discountdealslist.databinding.LiDealsListBinding
-import com.kidusmichaelworku.discountdealslist.services.Offers
 
-class DealsListRecyclerAdapter(private val offersList: List<DealModel>, private val viewModel: DealsViewModel)
-    : RecyclerView.Adapter<DealsListRecyclerAdapter.DealsListViewHolder>() {
+class DealsListRecyclerAdapter(
+    private val offersList: List<DealModel>,
+    private val viewModel: DealsViewModel
+) : RecyclerView.Adapter<DealsListRecyclerAdapter.DealsListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DealsListViewHolder {
         val binding = LiDealsListBinding
@@ -26,28 +26,28 @@ class DealsListRecyclerAdapter(private val offersList: List<DealModel>, private 
     override fun getItemCount() = offersList.size
 
     override fun onBindViewHolder(holder: DealsListViewHolder, position: Int) {
-        with(holder){
+        with(holder) {
             with(offersList[position]) {
-//                binding.tvDescriptionDeals.text = offersList[position].description
-//                binding.tvTitleDeals.text = offersList[position].title
-//                binding.tvCouponCodeDeals.text = offersList[position].code
-//                binding.tvDiscountedPriceDeals.text = offersList[position].offer_value
-
                 val title = offersList[position].title ?: "N/A"
                 val description = offersList[position].description ?: "N/A"
                 val coupon = offersList[position].code ?: "N/A"
                 val discountedPrice = offersList[position].offer_value ?: "N/A"
 
-                binding.tvDescriptionDeals.text = Html.fromHtml(description, Html.FROM_HTML_MODE_COMPACT)
+                /** Used [Html] because the data fetched contains HTML contents **/
+                binding.tvDescriptionDeals.text =
+                    Html.fromHtml(description, Html.FROM_HTML_MODE_COMPACT)
                 binding.tvTitleDeals.text = Html.fromHtml(title, Html.FROM_HTML_MODE_COMPACT)
                 binding.tvCouponCodeDeals.text = Html.fromHtml(coupon, Html.FROM_HTML_MODE_COMPACT)
-                binding.tvDiscountedPriceDeals.text = Html.fromHtml(discountedPrice, Html.FROM_HTML_MODE_COMPACT)
+                binding.tvDiscountedPriceDeals.text =
+                    Html.fromHtml(discountedPrice, Html.FROM_HTML_MODE_COMPACT)
 
                 Glide.with(holder.itemView.context)
                     .load(offersList[position].image_url)
                     .into(binding.ivDeals)
 
                 binding.imageButton.setOnClickListener {
+                    /** Converts the data to a FavoritesModel entity so
+                     * that it can be stored in the database **/
                     val addedDeal = FavoritesModel(
                         offersList[position].lmd_id,
                         offersList[position].store,
@@ -71,20 +71,26 @@ class DealsListRecyclerAdapter(private val offersList: List<DealModel>, private 
                         offersList[position].end_date
                     )
 
+                    /** Adds the data to the database **/
                     viewModel.addFavorites(addedDeal)
-                    Toast.makeText(holder.itemView.context, "Added to favorites",
-                        Toast.LENGTH_SHORT).show()
+
+                    Toast.makeText(
+                        holder.itemView.context, "Added to favorites",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
 
                 holder.itemView.setOnClickListener {
-                    val action: NavDirections = DealsFragmentDirections.actionNavigationDealsToDealsDetailFragment(offersModel = offersList[position])
+                    val action: NavDirections =
+                        DealsFragmentDirections.actionNavigationDealsToDealsDetailFragment(
+                            offersModel = offersList[position]
+                        )
                     Navigation.findNavController(it).navigate(action)
                 }
             }
         }
     }
 
-    inner class DealsListViewHolder(val binding: LiDealsListBinding)
-        :RecyclerView.ViewHolder(binding.root)
-
+    inner class DealsListViewHolder(val binding: LiDealsListBinding) :
+        RecyclerView.ViewHolder(binding.root)
 }
