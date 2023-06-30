@@ -2,10 +2,10 @@ package com.kidusmichaelworku.discountdealslist.fragment.deals_detail
 
 import android.os.Bundle
 import android.text.Html
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.kidusmichaelworku.discountdealslist.database.DealModel
 import com.kidusmichaelworku.discountdealslist.database.FavoritesModel
@@ -57,11 +57,11 @@ class DealsDetailFragment : Fragment() {
             expiryDate = favorites.end_date ?: "N/A"
             termsAndConditions = favorites.terms_and_conditions ?: "N/A"
         }
-
+        /** Used [Glide] to display images from the URL **/
         Glide.with(requireContext())
             .load(imageURL)
             .into(binding.ivDealInfo)
-
+        /** Display the data **/
         binding.tvTitleDealInfo.text = Html.fromHtml(title, Html.FROM_HTML_MODE_COMPACT)
         binding.tvDescriptionDealInfo.text = Html.fromHtml(description, Html.FROM_HTML_MODE_COMPACT)
         binding.tvExpiryDateDealInfo.text = Html.fromHtml(expiryDate, Html.FROM_HTML_MODE_COMPACT)
@@ -71,6 +71,5 @@ class DealsDetailFragment : Fragment() {
             Html.fromHtml(originalPrice, Html.FROM_HTML_MODE_COMPACT)
         binding.tvTermsAndConsDealInfo.text =
             Html.fromHtml(termsAndConditions, Html.FROM_HTML_MODE_COMPACT)
-
     }
 }

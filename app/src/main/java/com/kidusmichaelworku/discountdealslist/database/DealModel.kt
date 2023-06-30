@@ -5,7 +5,6 @@ import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.kidusmichaelworku.discountdealslist.services.Offers
 
 /**
  * This is an entity or model that holds Deal elements.

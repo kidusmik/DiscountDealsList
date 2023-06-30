@@ -34,7 +34,6 @@ class FavoritesListRecyclerAdapter(
                 val discountedPrice = dealsList[position].offer_value ?: "N/A"
 
                 binding.imageButton.setImageResource(R.drawable.baseline_delete_forever_24)
-
                 /** Used [Html] because the data fetched contains HTML contents **/
                 binding.tvDescriptionDeals.text =
                     Html.fromHtml(description, Html.FROM_HTML_MODE_COMPACT)
@@ -42,11 +41,13 @@ class FavoritesListRecyclerAdapter(
                 binding.tvCouponCodeDeals.text = Html.fromHtml(coupon, Html.FROM_HTML_MODE_COMPACT)
                 binding.tvDiscountedPriceDeals.text =
                     Html.fromHtml(discountedPrice, Html.FROM_HTML_MODE_COMPACT)
-
+                /** Used [Glide] to display images from the URL **/
                 Glide.with(holder.itemView.context)
                     .load(dealsList[position].image_url)
                     .into(binding.ivDeals)
-
+                /** Handles action when the User taps on a list item by navigating the user
+                 * to the [DealsDetailFragment] to show the user more details about the Deal
+                 **/
                 holder.itemView.setOnClickListener {
                     val action: NavDirections =
                         FavoritesFragmentDirections.actionNavigationFavoritesToDealsDetailFragment(
@@ -54,6 +55,9 @@ class FavoritesListRecyclerAdapter(
                         )
                     Navigation.findNavController(it).navigate(action)
                 }
+                /** Handles action when the User taps on the trash icon by deleting the selected
+                 * list from the database
+                 **/
                 binding.imageButton.setOnClickListener {
                     viewModel.deleteDeal(dealsList[position])
                     Toast.makeText(

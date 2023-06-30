@@ -32,7 +32,6 @@ class DealsListRecyclerAdapter(
                 val description = offersList[position].description ?: "N/A"
                 val coupon = offersList[position].code ?: "N/A"
                 val discountedPrice = offersList[position].offer_value ?: "N/A"
-
                 /** Used [Html] because the data fetched contains HTML contents **/
                 binding.tvDescriptionDeals.text =
                     Html.fromHtml(description, Html.FROM_HTML_MODE_COMPACT)
@@ -40,13 +39,13 @@ class DealsListRecyclerAdapter(
                 binding.tvCouponCodeDeals.text = Html.fromHtml(coupon, Html.FROM_HTML_MODE_COMPACT)
                 binding.tvDiscountedPriceDeals.text =
                     Html.fromHtml(discountedPrice, Html.FROM_HTML_MODE_COMPACT)
-
+                /** Use [Glide] to display the image URL **/
                 Glide.with(holder.itemView.context)
                     .load(offersList[position].image_url)
                     .into(binding.ivDeals)
-
+                /** This lets the user add any of the deal in the list to favorites **/
                 binding.imageButton.setOnClickListener {
-                    /** Converts the data to a FavoritesModel entity so
+                    /** Converts the data to a [FavoritesModel] entity so
                      * that it can be stored in the database **/
                     val addedDeal = FavoritesModel(
                         offersList[position].lmd_id,
@@ -70,7 +69,6 @@ class DealsListRecyclerAdapter(
                         offersList[position].start_date,
                         offersList[position].end_date
                     )
-
                     /** Adds the data to the database **/
                     viewModel.addFavorites(addedDeal)
 
@@ -79,7 +77,7 @@ class DealsListRecyclerAdapter(
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-
+                /** This navigates to [DetailFragment] when the user taps on any of the list items **/
                 holder.itemView.setOnClickListener {
                     val action: NavDirections =
                         DealsFragmentDirections.actionNavigationDealsToDealsDetailFragment(
