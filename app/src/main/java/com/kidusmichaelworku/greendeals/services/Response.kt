@@ -1,4 +1,4 @@
-package com.kidusmichaelworku.discountdealslist.services
+package com.kidusmichaelworku.greendeals.services
 
 /**
  * This class is used to store the response fetched from the API

@@ -1,4 +1,4 @@
-package com.kidusmichaelworku.discountdealslist.fragment.deals
+package com.kidusmichaelworku.greendeals.fragment.deals
 
 import android.text.Html
 import android.view.LayoutInflater
@@ -8,9 +8,9 @@ import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.kidusmichaelworku.discountdealslist.database.DealModel
-import com.kidusmichaelworku.discountdealslist.database.FavoritesModel
-import com.kidusmichaelworku.discountdealslist.databinding.LiDealsListBinding
+import com.kidusmichaelworku.greendeals.database.DealModel
+import com.kidusmichaelworku.greendeals.database.FavoritesModel
+import com.kidusmichaelworku.greendeals.databinding.LiDealsListBinding
 
 class DealsListRecyclerAdapter(
     private val offersList: List<DealModel>,
@@ -44,7 +44,7 @@ class DealsListRecyclerAdapter(
                     .load(offersList[position].image_url)
                     .into(binding.ivDeals)
                 /** This lets the user add any of the deal in the list to favorites **/
-                binding.imageButton.setOnClickListener {
+                binding.buttonAddOrDelete.setOnClickListener {
                     /** Converts the data to a [FavoritesModel] entity so
                      * that it can be stored in the database **/
                     val addedDeal = FavoritesModel(
@@ -77,7 +77,7 @@ class DealsListRecyclerAdapter(
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-                /** This navigates to [DetailFragment] when the user taps on any of the list items **/
+                /** This navigates to DealsDetailFragment when the user taps on any of the list items **/
                 holder.itemView.setOnClickListener {
                     val action: NavDirections =
                         DealsFragmentDirections.actionNavigationDealsToDealsDetailFragment(

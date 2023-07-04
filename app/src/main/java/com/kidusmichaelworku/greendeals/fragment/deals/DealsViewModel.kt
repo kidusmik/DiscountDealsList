@@ -1,13 +1,13 @@
-package com.kidusmichaelworku.discountdealslist.fragment.deals
+package com.kidusmichaelworku.greendeals.fragment.deals
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.kidusmichaelworku.discountdealslist.database.DealModel
-import com.kidusmichaelworku.discountdealslist.database.FavoritesModel
-import com.kidusmichaelworku.discountdealslist.database.GreenDealsDatabase
-import com.kidusmichaelworku.discountdealslist.database.GreenDealsRepository
+import com.kidusmichaelworku.greendeals.database.DealModel
+import com.kidusmichaelworku.greendeals.database.FavoritesModel
+import com.kidusmichaelworku.greendeals.database.GreenDealsDatabase
+import com.kidusmichaelworku.greendeals.database.GreenDealsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

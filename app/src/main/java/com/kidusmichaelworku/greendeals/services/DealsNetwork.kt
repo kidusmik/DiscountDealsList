@@ -1,4 +1,4 @@
-package com.kidusmichaelworku.discountdealslist.services
+package com.kidusmichaelworku.greendeals.services
 
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit

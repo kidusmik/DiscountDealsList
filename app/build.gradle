@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace 'com.kidusmichaelworku.discountdealslist'
+    namespace 'com.kidusmichaelworku.greendeals'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.kidusmichaelworku.discountdealslist"
+        applicationId "com.kidusmichaelworku.greendeals"
         minSdk 24
         targetSdk 34
         versionCode 1

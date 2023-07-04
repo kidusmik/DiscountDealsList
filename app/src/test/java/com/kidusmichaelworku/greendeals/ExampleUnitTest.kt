@@ -1,4 +1,4 @@
-package com.kidusmichaelworku.discountdealslist
+package com.kidusmichaelworku.greendeals
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

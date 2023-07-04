@@ -1,4 +1,4 @@
-package com.kidusmichaelworku.discountdealslist.database
+package com.kidusmichaelworku.greendeals.database
 
 import android.os.Parcel
 import android.os.Parcelable
