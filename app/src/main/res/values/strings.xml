@@ -20,4 +20,6 @@
     <string name="image_of_the_store">Image of the Store</string>
     <string name="nothing_to_filter_by_date">Nothing to Filter by Date</string>
     <string name="offers_are_sorted_by_date">Offers are sorted by Date</string>
+    <string name="added_to_favorites">Added to favorites</string>
+    <string name="deal_deleted">Deal deleted</string>
 </resources>

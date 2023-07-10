@@ -49,7 +49,7 @@ class FavoritesFragment : Fragment() {
         favoritesViewModel: FavoritesViewModel,
         layoutManager: RecyclerView.LayoutManager
     ) {
-        val rvDealsAdapter = FavoritesListRecyclerAdapter(it, favoritesViewModel)
+        val rvDealsAdapter = FavoritesListRecyclerAdapter(it, favoritesViewModel, requireContext())
 
         binding.rvFavoritesList.layoutManager = layoutManager
         binding.rvFavoritesList.adapter = rvDealsAdapter

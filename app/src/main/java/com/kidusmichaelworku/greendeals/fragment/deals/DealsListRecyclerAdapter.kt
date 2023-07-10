@@ -1,5 +1,6 @@
 package com.kidusmichaelworku.greendeals.fragment.deals
 
+import android.content.Context
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,13 +9,15 @@ import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.kidusmichaelworku.greendeals.R
 import com.kidusmichaelworku.greendeals.database.DealModel
 import com.kidusmichaelworku.greendeals.database.FavoritesModel
 import com.kidusmichaelworku.greendeals.databinding.LiDealsListBinding
 
 class DealsListRecyclerAdapter(
     private val offersList: List<DealModel>,
-    private val viewModel: DealsViewModel
+    private val viewModel: DealsViewModel,
+    private val context: Context
 ) : RecyclerView.Adapter<DealsListRecyclerAdapter.DealsListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DealsListViewHolder {
@@ -47,33 +50,12 @@ class DealsListRecyclerAdapter(
                 binding.buttonAddOrDelete.setOnClickListener {
                     /** Converts the data to a [FavoritesModel] entity so
                      * that it can be stored in the database **/
-                    val addedDeal = FavoritesModel(
-                        offersList[position].lmd_id,
-                        offersList[position].store,
-                        offersList[position].merchant_homepage,
-                        offersList[position].long_offer,
-                        offersList[position].title,
-                        offersList[position].description,
-                        offersList[position].code,
-                        offersList[position].terms_and_conditions,
-                        offersList[position].categories,
-                        offersList[position].featured,
-                        offersList[position].publisher_exclusive,
-                        offersList[position].url,
-                        offersList[position].smartlink,
-                        offersList[position].image_url,
-                        offersList[position].type,
-                        offersList[position].offer,
-                        offersList[position].offer_value,
-                        offersList[position].status,
-                        offersList[position].start_date,
-                        offersList[position].end_date
-                    )
+                    val addedDeal = FavoritesModel(offersList[position])
                     /** Adds the data to the database **/
                     viewModel.addFavorites(addedDeal)
 
                     Toast.makeText(
-                        holder.itemView.context, "Added to favorites",
+                        holder.itemView.context, context.getString(R.string.added_to_favorites),
                         Toast.LENGTH_SHORT
                     ).show()
                 }

@@ -5,6 +5,7 @@ import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.kidusmichaelworku.greendeals.services.Offers
 
 /**
  * This is an entity or model that holds Deal elements.
@@ -55,6 +56,30 @@ data class DealModel(
         parcel.readString(),
         parcel.readString(),
         parcel.readString()
+    )
+
+    /** This constructor's purpose is to convert the [Offers] data class to [DealModel] data class **/
+    constructor(offer: Offers) : this(
+        offer.lmd_id,
+        offer.store,
+        offer.merchant_homepage,
+        offer.long_offer,
+        offer.title,
+        offer.description,
+        offer.code,
+        offer.terms_and_conditions,
+        offer.categories,
+        offer.featured,
+        offer.publisher_exclusive,
+        offer.url,
+        offer.smartlink,
+        offer.image_url,
+        offer.type,
+        offer.offer,
+        offer.offer_value,
+        offer.status,
+        offer.start_date,
+        offer.end_date
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

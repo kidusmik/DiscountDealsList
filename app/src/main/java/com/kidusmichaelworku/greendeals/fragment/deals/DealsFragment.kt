@@ -112,28 +112,7 @@ class DealsFragment : Fragment() {
         dealsViewModel: DealsViewModel
     ) {
         for (offer in offers) {
-            val dealModel = DealModel(
-                offer.lmd_id,
-                offer.store,
-                offer.merchant_homepage,
-                offer.long_offer,
-                offer.title,
-                offer.description,
-                offer.code,
-                offer.terms_and_conditions,
-                offer.categories,
-                offer.featured,
-                offer.publisher_exclusive,
-                offer.url,
-                offer.smartlink,
-                offer.image_url,
-                offer.type,
-                offer.offer,
-                offer.offer_value,
-                offer.status,
-                offer.start_date,
-                offer.end_date
-            )
+            val dealModel = DealModel(offer)
             /** Insert the offer into the Deal Table of the database **/
             dealsViewModel.insertDeal(dealModel)
         }
@@ -147,7 +126,7 @@ class DealsFragment : Fragment() {
         dealsViewModel: DealsViewModel,
         layoutManager: RecyclerView.LayoutManager
     ) {
-        val rvDealsAdapter = DealsListRecyclerAdapter(it, dealsViewModel)
+        val rvDealsAdapter = DealsListRecyclerAdapter(it, dealsViewModel, requireContext())
 
         binding.rvDealsList.layoutManager = layoutManager
         binding.rvDealsList.adapter = rvDealsAdapter

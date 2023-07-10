@@ -57,6 +57,30 @@ data class FavoritesModel(
         parcel.readString()
     )
 
+    /** This constructor's purpose is to convert the [DealModel] data class to [FavoritesModel] data class **/
+    constructor(dealModel: DealModel) : this(
+        dealModel.lmd_id,
+        dealModel.store,
+        dealModel.merchant_homepage,
+        dealModel.long_offer,
+        dealModel.title,
+        dealModel.description,
+        dealModel.code,
+        dealModel.terms_and_conditions,
+        dealModel.categories,
+        dealModel.featured,
+        dealModel.publisher_exclusive,
+        dealModel.url,
+        dealModel.smartlink,
+        dealModel.image_url,
+        dealModel.type,
+        dealModel.offer,
+        dealModel.offer_value,
+        dealModel.status,
+        dealModel.start_date,
+        dealModel.end_date
+    )
+
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(lmd_id)
         parcel.writeString(store)

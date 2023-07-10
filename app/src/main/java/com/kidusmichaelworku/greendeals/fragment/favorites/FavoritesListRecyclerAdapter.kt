@@ -1,5 +1,6 @@
 package com.kidusmichaelworku.greendeals.fragment.favorites
 
+import android.content.Context
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -14,7 +15,8 @@ import com.kidusmichaelworku.greendeals.databinding.LiDealsListBinding
 
 class FavoritesListRecyclerAdapter(
     private val dealsList: List<FavoritesModel>,
-    private val viewModel: FavoritesViewModel
+    private val viewModel: FavoritesViewModel,
+    private val context: Context
 ) : RecyclerView.Adapter<FavoritesListRecyclerAdapter.FavoritesListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoritesListViewHolder {
@@ -61,7 +63,7 @@ class FavoritesListRecyclerAdapter(
                 binding.buttonAddOrDelete.setOnClickListener {
                     viewModel.deleteDeal(dealsList[position])
                     Toast.makeText(
-                        holder.itemView.context, "Deal deleted",
+                        holder.itemView.context, context.getString(R.string.deal_deleted),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
