@@ -1,4 +1,4 @@
-package com.kidusmichaelworku.discountdealslist.fragment.deals
+package com.kidusmichaelworku.greendeals.fragment.deals
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,12 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.kidusmichaelworku.discountdealslist.R
-import com.kidusmichaelworku.discountdealslist.database.DealModel
-import com.kidusmichaelworku.discountdealslist.databinding.FragmentDealsBinding
-import com.kidusmichaelworku.discountdealslist.services.DealsNetwork
-import com.kidusmichaelworku.discountdealslist.services.DealsService
-import com.kidusmichaelworku.discountdealslist.services.Offers
+import com.kidusmichaelworku.greendeals.R
+import com.kidusmichaelworku.greendeals.database.DealModel
+import com.kidusmichaelworku.greendeals.databinding.FragmentDealsBinding
+import com.kidusmichaelworku.greendeals.services.DealsNetwork
+import com.kidusmichaelworku.greendeals.services.DealsService
+import com.kidusmichaelworku.greendeals.services.Offers
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -44,7 +44,7 @@ class DealsFragment : Fragment() {
         binding.buttonSortByStore.setOnClickListener {
             dealsViewModel.getDealsSortedByStore().observe(viewLifecycleOwner) {
                 /** Check if the Deals Table in the database is empty or not.
-                 * If the table is empty then this will fetch data from the API.
+                 * If the table is not empty then this will sort the items by Store name.
                  */
                 if (it.isEmpty()) {
                     Toast.makeText(
@@ -67,7 +67,7 @@ class DealsFragment : Fragment() {
         binding.buttonSortByDate.setOnClickListener {
             dealsViewModel.getDealsSortedByDate().observe(viewLifecycleOwner) {
                 /** Checks if the Deals table in the database is empty or not.
-                 * If the table is empty then this will fetch data from the API.
+                 * If the table is not empty then this will store the items by Start date.
                  */
                 if (it.isEmpty()) {
                     Toast.makeText(
@@ -112,28 +112,7 @@ class DealsFragment : Fragment() {
         dealsViewModel: DealsViewModel
     ) {
         for (offer in offers) {
-            val dealModel = DealModel(
-                offer.lmd_id,
-                offer.store,
-                offer.merchant_homepage,
-                offer.long_offer,
-                offer.title,
-                offer.description,
-                offer.code,
-                offer.terms_and_conditions,
-                offer.categories,
-                offer.featured,
-                offer.publisher_exclusive,
-                offer.url,
-                offer.smartlink,
-                offer.image_url,
-                offer.type,
-                offer.offer,
-                offer.offer_value,
-                offer.status,
-                offer.start_date,
-                offer.end_date
-            )
+            val dealModel = DealModel(offer)
             /** Insert the offer into the Deal Table of the database **/
             dealsViewModel.insertDeal(dealModel)
         }
@@ -141,13 +120,13 @@ class DealsFragment : Fragment() {
 
     /**
      * Passes the list to the [RecyclerView] and displays the list
-     * **/
+     */
     private fun displayDealsList(
         it: List<DealModel>,
         dealsViewModel: DealsViewModel,
         layoutManager: RecyclerView.LayoutManager
     ) {
-        val rvDealsAdapter = DealsListRecyclerAdapter(it, dealsViewModel)
+        val rvDealsAdapter = DealsListRecyclerAdapter(it, dealsViewModel, requireContext())
 
         binding.rvDealsList.layoutManager = layoutManager
         binding.rvDealsList.adapter = rvDealsAdapter

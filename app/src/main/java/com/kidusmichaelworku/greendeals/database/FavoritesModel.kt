@@ -1,4 +1,4 @@
-package com.kidusmichaelworku.discountdealslist.database
+package com.kidusmichaelworku.greendeals.database
 
 import android.os.Parcel
 import android.os.Parcelable
@@ -55,6 +55,30 @@ data class FavoritesModel(
         parcel.readString(),
         parcel.readString(),
         parcel.readString()
+    )
+
+    /** This constructor's purpose is to convert the [DealModel] data class to [FavoritesModel] data class **/
+    constructor(dealModel: DealModel) : this(
+        dealModel.lmd_id,
+        dealModel.store,
+        dealModel.merchant_homepage,
+        dealModel.long_offer,
+        dealModel.title,
+        dealModel.description,
+        dealModel.code,
+        dealModel.terms_and_conditions,
+        dealModel.categories,
+        dealModel.featured,
+        dealModel.publisher_exclusive,
+        dealModel.url,
+        dealModel.smartlink,
+        dealModel.image_url,
+        dealModel.type,
+        dealModel.offer,
+        dealModel.offer_value,
+        dealModel.status,
+        dealModel.start_date,
+        dealModel.end_date
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

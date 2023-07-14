@@ -1,4 +1,4 @@
-package com.kidusmichaelworku.discountdealslist.database
+package com.kidusmichaelworku.greendeals.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

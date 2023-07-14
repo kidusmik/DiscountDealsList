@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <color name="purple_200">#80DEEA</color>
-    <color name="purple_500">#00BCD4</color>
-    <color name="purple_700">#0097A7</color>
+    <color name="green_200">#A5D6A7</color>
+    <color name="green_500">#4CAF50</color>
+    <color name="green_700">#388E3C</color>
 
     <color name="teal_200">#03DAC5</color>
     <color name="teal_700">#018786</color>
@@ -13,7 +12,6 @@
     <color name="card_text_color">#515367</color>
     <color name="card_text_color_desc">#B4B8CB</color>
     <color name="title_action_bar">#000000</color>
-    <color name="color_psy_mbti_main">#00acbf</color>
 
     <color name="material_red">#D32F2F</color>
     <color name="material_green">#388E3C</color>

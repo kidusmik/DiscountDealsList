@@ -1,4 +1,4 @@
-package com.kidusmichaelworku.discountdealslist.fragment.deals_detail
+package com.kidusmichaelworku.greendeals.fragment.deals_detail
 
 import android.os.Bundle
 import android.text.Html
@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-import com.kidusmichaelworku.discountdealslist.database.DealModel
-import com.kidusmichaelworku.discountdealslist.database.FavoritesModel
-import com.kidusmichaelworku.discountdealslist.databinding.FragmentDealsDetailBinding
+import com.kidusmichaelworku.greendeals.database.DealModel
+import com.kidusmichaelworku.greendeals.database.FavoritesModel
+import com.kidusmichaelworku.greendeals.databinding.FragmentDealsDetailBinding
 
 class DealsDetailFragment : Fragment() {
     private var _binding: FragmentDealsDetailBinding? = null

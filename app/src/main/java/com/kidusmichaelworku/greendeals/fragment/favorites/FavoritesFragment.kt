@@ -1,4 +1,4 @@
-package com.kidusmichaelworku.discountdealslist.fragment.favorites
+package com.kidusmichaelworku.greendeals.fragment.favorites
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.kidusmichaelworku.discountdealslist.database.FavoritesModel
-import com.kidusmichaelworku.discountdealslist.databinding.FragmentFavoritesBinding
+import com.kidusmichaelworku.greendeals.database.FavoritesModel
+import com.kidusmichaelworku.greendeals.databinding.FragmentFavoritesBinding
 
 class FavoritesFragment : Fragment() {
 
@@ -43,13 +43,13 @@ class FavoritesFragment : Fragment() {
 
     /**
      * Passes the list to the [RecyclerView] and displays the list
-     * **/
+     */
     private fun displayFavoritesList(
         it: List<FavoritesModel>,
         favoritesViewModel: FavoritesViewModel,
         layoutManager: RecyclerView.LayoutManager
     ) {
-        val rvDealsAdapter = FavoritesListRecyclerAdapter(it, favoritesViewModel)
+        val rvDealsAdapter = FavoritesListRecyclerAdapter(it, favoritesViewModel, requireContext())
 
         binding.rvFavoritesList.layoutManager = layoutManager
         binding.rvFavoritesList.adapter = rvDealsAdapter

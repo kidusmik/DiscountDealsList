@@ -1,5 +1,6 @@
-package com.kidusmichaelworku.discountdealslist.fragment.favorites
+package com.kidusmichaelworku.greendeals.fragment.favorites
 
+import android.content.Context
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,13 +9,14 @@ import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.kidusmichaelworku.discountdealslist.R
-import com.kidusmichaelworku.discountdealslist.database.FavoritesModel
-import com.kidusmichaelworku.discountdealslist.databinding.LiDealsListBinding
+import com.kidusmichaelworku.greendeals.R
+import com.kidusmichaelworku.greendeals.database.FavoritesModel
+import com.kidusmichaelworku.greendeals.databinding.LiDealsListBinding
 
 class FavoritesListRecyclerAdapter(
     private val dealsList: List<FavoritesModel>,
-    private val viewModel: FavoritesViewModel
+    private val viewModel: FavoritesViewModel,
+    private val context: Context
 ) : RecyclerView.Adapter<FavoritesListRecyclerAdapter.FavoritesListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoritesListViewHolder {
@@ -33,7 +35,7 @@ class FavoritesListRecyclerAdapter(
                 val coupon = dealsList[position].code ?: "N/A"
                 val discountedPrice = dealsList[position].offer_value ?: "N/A"
 
-                binding.imageButton.setImageResource(R.drawable.baseline_delete_forever_24)
+                binding.buttonAddOrDelete.setImageResource(R.drawable.baseline_delete_forever_24)
                 /** Used [Html] because the data fetched contains HTML contents **/
                 binding.tvDescriptionDeals.text =
                     Html.fromHtml(description, Html.FROM_HTML_MODE_COMPACT)
@@ -46,8 +48,8 @@ class FavoritesListRecyclerAdapter(
                     .load(dealsList[position].image_url)
                     .into(binding.ivDeals)
                 /** Handles action when the User taps on a list item by navigating the user
-                 * to the [DealsDetailFragment] to show the user more details about the Deal
-                 **/
+                 * to the DealsDetailFragment to show the user more details about the Deal
+                 */
                 holder.itemView.setOnClickListener {
                     val action: NavDirections =
                         FavoritesFragmentDirections.actionNavigationFavoritesToDealsDetailFragment(
@@ -57,11 +59,11 @@ class FavoritesListRecyclerAdapter(
                 }
                 /** Handles action when the User taps on the trash icon by deleting the selected
                  * list from the database
-                 **/
-                binding.imageButton.setOnClickListener {
+                 */
+                binding.buttonAddOrDelete.setOnClickListener {
                     viewModel.deleteDeal(dealsList[position])
                     Toast.makeText(
-                        holder.itemView.context, "Deal deleted",
+                        holder.itemView.context, context.getString(R.string.deal_deleted),
                         Toast.LENGTH_SHORT
                     ).show()
                 }

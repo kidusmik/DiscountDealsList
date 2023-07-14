@@ -1,4 +1,4 @@
-package com.kidusmichaelworku.discountdealslist.database
+package com.kidusmichaelworku.greendeals.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -30,6 +30,6 @@ interface DealDAO {
     /**
      * Fetches all the Deals sorted by Store
      */
-    @Query("SELECT * from deals_table ORDER BY  store ASC")
+    @Query("SELECT * from deals_table ORDER BY store ASC")
     fun getDealsSortedByStore(): LiveData<List<DealModel>>
 }
